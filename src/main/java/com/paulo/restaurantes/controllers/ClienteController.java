@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.paulo.restaurantes.models.Restaurante;
-import com.paulo.restaurantes.services.RestauranteService;
+import com.paulo.restaurantes.models.Cliente;
+import com.paulo.restaurantes.services.ClienteService;
 
 @RestController
-@RequestMapping("/restaurantes")
-public class RestauranteController {
+@RequestMapping("/clientes")
+public class ClienteController {
 
-	@Autowired private RestauranteService restauranteService;
+	@Autowired private ClienteService clienteService;
 	
 	@GetMapping
-	public List<Restaurante> listar(){
-		return this.restauranteService.listar();
+	public List<Cliente> listar(){
+		return this.clienteService.listar();
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Restaurante cadastrar(@Valid @RequestBody Restaurante restaurante) {
-		return restauranteService.cadastrar(restaurante);
+	public Cliente cadastrar(@Valid @RequestBody Cliente cliente) {
+		return clienteService.cadastrar(cliente);
 	}
 }
