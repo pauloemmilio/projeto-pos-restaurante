@@ -1,6 +1,7 @@
 package com.paulo.restaurantes.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,15 @@ public class ClienteService {
 		return clienteRepository.findAll();
 	}
 
-	public Cliente cadastrar(Cliente cliente) {
+	public Cliente salvar(Cliente cliente) {
 		return clienteRepository.save(cliente);
+	}
+
+	public Optional<Cliente> buscarPorId(Long id) {
+		return clienteRepository.findById(id);
+	}
+
+	public void deletar(Long id) {
+		clienteRepository.deleteById(id);
 	}
 }

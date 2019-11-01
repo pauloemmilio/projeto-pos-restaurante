@@ -18,11 +18,15 @@ public class RestauranteService {
 		return restauranteRepository.findAll();
 	}
 
-	public Restaurante cadastrar(Restaurante restaurante) {
+	public Restaurante salvar(Restaurante restaurante) {
 		return restauranteRepository.save(restaurante);
 	}
 
 	public Optional<Restaurante> buscarPorId(Long id) {
 		return restauranteRepository.findById(id);
+	}
+
+	public void deletar(Long id) {
+		restauranteRepository.deleteById(id);
 	}
 }
