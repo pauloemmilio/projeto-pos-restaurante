@@ -33,4 +33,8 @@ public class PedidoService {
 	public List<Pedido> buscarPorProdutoId(Long produtoId) {
 		return pedidoRepository.findByProdutoId(produtoId);
 	}
+
+	public List<Pedido> buscarPorClienteId(Long clienteId) {
+		return pedidoRepository.findByClienteId(clienteId);
+	}
 }

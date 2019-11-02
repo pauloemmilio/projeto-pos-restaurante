@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.paulo.restaurantes.models.Cliente;
+import com.paulo.restaurantes.models.Pedido;
 import com.paulo.restaurantes.repositories.ClienteRepository;
 
 @Service
 public class ClienteService {
 
 	@Autowired private ClienteRepository clienteRepository;
+	@Autowired private PedidoService pedidoService;
 	
 	public List<Cliente> listar () {
 		return clienteRepository.findAll();
@@ -28,5 +30,14 @@ public class ClienteService {
 
 	public void deletar(Long id) {
 		clienteRepository.deleteById(id);
+	}
+
+	public void deletar(Cliente cliente) {
+		Long clienteId = cliente.getId();
+		List<Pedido> pedidos = pedidoService.buscarPorClienteId(clienteId);
+		for(Pedido pedido: pedidos) {
+			pedidoService.deletar(pedido.getId());
+		}
+		this.deletar(clienteId);
 	}
 }

@@ -74,6 +74,6 @@ public class ProdutoController {
 		if(!produtoOpt.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ERRO_PRODUTO_NAO_ENCONTRADO);
 		}
-		produtoService.deletar(id);
+		produtoService.deletar(produtoOpt.get());
 	}
 }

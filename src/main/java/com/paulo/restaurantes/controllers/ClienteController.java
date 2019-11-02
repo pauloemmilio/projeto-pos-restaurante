@@ -59,6 +59,6 @@ public class ClienteController {
 		if(!clienteOpt.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ERRO_CLIENTE_NAO_ENCONTRADO);
 		}
-		clienteService.deletar(id);
+		clienteService.deletar(clienteOpt.get());
     }
 }
