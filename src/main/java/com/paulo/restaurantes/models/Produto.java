@@ -1,7 +1,6 @@
 package com.paulo.restaurantes.models;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,8 +18,8 @@ public class Produto {
 	@NotEmpty
 	private String nome;
 	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurante_id")
+	@ManyToOne
+	@JoinColumn(name = "restaurante_id", referencedColumnName = "id")
 	private Restaurante restaurante;
 	
 	public Produto(String nome, Restaurante restaurante) {

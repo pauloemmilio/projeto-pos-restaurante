@@ -59,6 +59,6 @@ public class RestauranteController {
 		if(!restauranteOpt.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ERRO_RESTAURANTE_NAO_ENCONTRADO);
 		}
-		restauranteService.deletar(id);
+		restauranteService.deletar(restauranteOpt.get());
 	}
 }

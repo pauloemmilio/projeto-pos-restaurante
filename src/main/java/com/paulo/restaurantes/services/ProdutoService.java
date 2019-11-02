@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.paulo.restaurantes.models.Pedido;
 import com.paulo.restaurantes.models.Produto;
 import com.paulo.restaurantes.repositories.ProdutoRepository;
 
@@ -15,6 +16,7 @@ import com.paulo.restaurantes.repositories.ProdutoRepository;
 public class ProdutoService {
 
 	@Autowired private ProdutoRepository produtoRepository;
+	@Autowired private PedidoService pedidoService;
 	
 	public List<Produto> listar(){
 		return produtoRepository.findAll();
@@ -30,5 +32,18 @@ public class ProdutoService {
 
 	public void deletar(Long id) {
 		produtoRepository.deleteById(id);
+	}
+
+	public List<Produto> buscarPorRestauranteId(Long restauranteId) {
+		return produtoRepository.findByRestauranteId(restauranteId);
+	}
+
+	public void deletar(Produto produto) {
+		Long produtoId = produto.getId();
+		List<Pedido> pedidos = pedidoService.buscarPorProdutoId(produtoId);
+		for(Pedido pedido: pedidos) {
+			pedidoService.deletar(pedido.getId());
+		}
+		this.deletar(produtoId);
 	}
 }

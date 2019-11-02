@@ -1,7 +1,6 @@
 package com.paulo.restaurantes.models;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,12 +15,12 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "produto_id")
+	@ManyToOne
+    @JoinColumn(name = "produto_id", referencedColumnName = "id")
 	private Produto produto;
 	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id")
+	@ManyToOne
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
 	private Cliente cliente;
 	
 	public Pedido () {}

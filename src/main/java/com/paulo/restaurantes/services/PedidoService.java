@@ -29,4 +29,8 @@ public class PedidoService {
 	public void deletar(Long id) {
 		pedidoRepository.deleteById(id);
 	}
+
+	public List<Pedido> buscarPorProdutoId(Long produtoId) {
+		return pedidoRepository.findByProdutoId(produtoId);
+	}
 }

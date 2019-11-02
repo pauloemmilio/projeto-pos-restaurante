@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.paulo.restaurantes.models.Produto;
 import com.paulo.restaurantes.models.Restaurante;
 import com.paulo.restaurantes.repositories.RestauranteRepository;
 
@@ -13,6 +14,7 @@ import com.paulo.restaurantes.repositories.RestauranteRepository;
 public class RestauranteService {
 
 	@Autowired private RestauranteRepository restauranteRepository;
+	@Autowired private ProdutoService produtoService;
 	
 	public List<Restaurante> listar(){
 		return restauranteRepository.findAll();
@@ -28,5 +30,14 @@ public class RestauranteService {
 
 	public void deletar(Long id) {
 		restauranteRepository.deleteById(id);
+	}
+	
+	public void deletar(Restaurante restaurante) {
+		Long restauranteId = restaurante.getId();
+		List<Produto> produtos = produtoService.buscarPorRestauranteId(restauranteId);
+		for(Produto produto: produtos) {
+			produtoService.deletar(produto);
+		}
+		this.deletar(restauranteId);
 	}
 }
